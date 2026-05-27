@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { ShoppingBag, X, Instagram } from "lucide-react";
 import { useStore, CATEGORIES, Category } from "@/lib/store";
-import merakiLogoBege from "@assets/meraki_logo_bege_1779840593669.png";
+import merakiLogoBege from "@assets/meraki_logo_final_1779843613636.png";
 
 const GOLD = "#C9B99A";
 const BEGE = "#F5F0EB";
