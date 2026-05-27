@@ -84,12 +84,17 @@ export default function Home() {
           className="absolute inset-0"
           style={{ backgroundColor: "rgba(17,17,17,0.75)" }}
         />
-        {/* Texto centralizado com padding-bottom para alinhar ao espaço vazio da imagem */}
+        {/* Texto posicionado absolutamente no banner */}
         <div
-          className="absolute inset-0 flex flex-col items-center justify-center px-6"
-          style={{ paddingBottom: "220px" }}
+          style={{
+            position: "absolute",
+            top: "42%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            textAlign: "center",
+            width: "80%",
+          }}
         >
-          <div className="text-center max-w-3xl">
             <h1
               className="font-serif italic font-light leading-tight"
               style={{ fontSize: "clamp(2.4rem, 6vw, 5rem)", color: BEGE }}
@@ -108,7 +113,6 @@ export default function Home() {
             >
               Ouse e sinta-se incrível! Lingeries para todas as ocasiões, vista-se com conforto.
             </p>
-          </div>
         </div>
       </section>
 
