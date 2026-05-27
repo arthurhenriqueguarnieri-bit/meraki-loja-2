@@ -11,8 +11,8 @@ const DRAWER_BG = "#111111";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const [, navigate] = useLocation();
-  const cart = useStore(state => state.cart);
-  const setActiveCategory = useStore(state => state.setActiveCategory);
+  const cart = useStore((state) => state.cart);
+  const setActiveCategory = useStore((state) => state.setActiveCategory);
   const cartItemCount = cart.reduce((acc, item) => acc + item.quantity, 0);
 
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -23,7 +23,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
     } else {
       document.body.style.overflow = "";
     }
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [drawerOpen]);
 
   const handleCategoryClick = (cat: Category) => {
@@ -34,14 +36,22 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-[100dvh] flex flex-col font-sans text-foreground bg-background">
-
       {/* ── HEADER ── */}
       <header
         className="sticky top-0 z-50 border-b"
-        style={{ backgroundColor: HEADER_BG, borderColor: GOLD, overflow: "visible", minHeight: "60px", display: "flex", alignItems: "center" }}
+        style={{
+          backgroundColor: HEADER_BG,
+          borderColor: GOLD,
+          overflow: "visible",
+          minHeight: "60px",
+          display: "flex",
+          alignItems: "center",
+        }}
       >
-        <div className="container mx-auto px-4 flex items-center justify-between w-full" style={{ overflow: "visible", minHeight: "60px" }}>
-
+        <div
+          className="container mx-auto px-4 flex items-center justify-between w-full"
+          style={{ overflow: "visible", minHeight: "60px" }}
+        >
           {/* Hamburger */}
           <div className="w-16 flex items-center">
             <button
@@ -50,7 +60,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
               className="p-2 -ml-2 transition-opacity hover:opacity-70"
               style={{ background: "none", border: "none", cursor: "pointer" }}
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={GOLD} strokeWidth="1.5" strokeLinecap="round">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke={GOLD}
+                strokeWidth="1.5"
+                strokeLinecap="round"
+              >
                 <line x1="3" y1="7" x2="21" y2="7" />
                 <line x1="3" y1="12" x2="21" y2="12" />
                 <line x1="3" y1="17" x2="21" y2="17" />
@@ -59,12 +77,21 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </div>
 
           {/* Logo */}
-          <Link href="/" className="flex items-center justify-center group select-none" style={{ overflow: "visible" }}>
+          <Link
+            href="/"
+            className="flex items-center justify-center group select-none"
+            style={{ overflow: "visible" }}
+          >
             <img
               src={merakiLogoBege}
               alt="Meraki Moda Íntima"
               className="transition-opacity group-hover:opacity-75"
-              style={{ height: "50px", width: "auto", display: "block", objectFit: "contain" }}
+              style={{
+                height: "45px",
+                width: "180px",
+                display: "block",
+                objectFit: "contain",
+              }}
             />
           </Link>
 
@@ -93,7 +120,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
       {drawerOpen && (
         <div
           className="fixed inset-0 z-[100]"
-          style={{ backgroundColor: "rgba(0,0,0,0.6)", backdropFilter: "blur(2px)" }}
+          style={{
+            backgroundColor: "rgba(0,0,0,0.6)",
+            backdropFilter: "blur(2px)",
+          }}
           onClick={() => setDrawerOpen(false)}
         />
       )}
@@ -124,7 +154,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
             aria-label="Fechar menu"
             onClick={() => setDrawerOpen(false)}
             className="p-1 transition-opacity hover:opacity-70"
-            style={{ background: "none", border: "none", cursor: "pointer", color: GOLD }}
+            style={{
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              color: GOLD,
+            }}
           >
             <X className="w-5 h-5" strokeWidth={1.5} />
           </button>
@@ -134,11 +169,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <nav className="flex flex-col px-6 pt-6 pb-2 gap-1">
           <span
             className="font-sans font-light mb-3"
-            style={{ fontSize: "0.55rem", letterSpacing: "0.3em", textTransform: "uppercase", color: GOLD, opacity: 0.6 }}
+            style={{
+              fontSize: "0.55rem",
+              letterSpacing: "0.3em",
+              textTransform: "uppercase",
+              color: GOLD,
+              opacity: 0.6,
+            }}
           >
             Coleção
           </span>
-          {CATEGORIES.map(cat => (
+          {CATEGORIES.map((cat) => (
             <button
               key={cat}
               onClick={() => handleCategoryClick(cat)}
@@ -174,10 +215,18 @@ export function Layout({ children }: { children: React.ReactNode }) {
             className="flex items-center gap-3 transition-opacity hover:opacity-100"
             style={{ opacity: 0.75 }}
           >
-            <Instagram className="w-4 h-4 shrink-0" style={{ color: GOLD }} strokeWidth={1.5} />
+            <Instagram
+              className="w-4 h-4 shrink-0"
+              style={{ color: GOLD }}
+              strokeWidth={1.5}
+            />
             <span
               className="font-sans font-light"
-              style={{ fontSize: "0.75rem", color: BEGE, letterSpacing: "0.05em" }}
+              style={{
+                fontSize: "0.75rem",
+                color: BEGE,
+                letterSpacing: "0.05em",
+              }}
             >
               @merakemodaintima
             </span>
@@ -191,12 +240,26 @@ export function Layout({ children }: { children: React.ReactNode }) {
             style={{ opacity: 0.75 }}
           >
             {/* WhatsApp icon SVG */}
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={GOLD} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="shrink-0">
-              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke={GOLD}
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="shrink-0"
+            >
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
             </svg>
             <span
               className="font-sans font-light"
-              style={{ fontSize: "0.75rem", color: BEGE, letterSpacing: "0.05em" }}
+              style={{
+                fontSize: "0.75rem",
+                color: BEGE,
+                letterSpacing: "0.05em",
+              }}
             >
               (66) 99962-12532
             </span>
@@ -207,8 +270,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
             onClick={() => setDrawerOpen(false)}
             className="transition-opacity"
             style={{ opacity: 0.15 }}
-            onMouseEnter={e => (e.currentTarget.style.opacity = "0.5")}
-            onMouseLeave={e => (e.currentTarget.style.opacity = "0.15")}
+            onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.5")}
+            onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.15")}
           >
             <span
               className="font-sans font-light text-[9px] uppercase"
@@ -225,7 +288,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
       {/* ── FOOTER ── */}
       <footer className="mt-20 py-16" style={{ backgroundColor: HEADER_BG }}>
         <div className="container mx-auto px-4 flex flex-col items-center text-center space-y-8">
-
           <div className="flex flex-col items-center">
             <span
               className="font-serif italic font-light leading-none"
@@ -235,7 +297,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </span>
             <span
               className="font-sans font-light mt-1 uppercase"
-              style={{ fontSize: "0.5rem", letterSpacing: "0.35em", color: GOLD }}
+              style={{
+                fontSize: "0.5rem",
+                letterSpacing: "0.35em",
+                color: GOLD,
+              }}
             >
               Moda Íntima
             </span>
@@ -248,7 +314,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
             Meraki — a arte de fazer com alma.
           </p>
 
-          <div className="w-16 border-t" style={{ borderColor: GOLD, opacity: 0.4 }} />
+          <div
+            className="w-16 border-t"
+            style={{ borderColor: GOLD, opacity: 0.4 }}
+          />
 
           <div className="flex items-center justify-center gap-10">
             <a
@@ -271,7 +340,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
               </span>
             </a>
 
-            <div style={{ width: 1, height: 32, backgroundColor: GOLD, opacity: 0.25 }} />
+            <div
+              style={{
+                width: 1,
+                height: 32,
+                backgroundColor: GOLD,
+                opacity: 0.25,
+              }}
+            />
 
             <a
               href="https://wa.me/5566999621253"
