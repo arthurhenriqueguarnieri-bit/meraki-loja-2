@@ -69,39 +69,44 @@ export default function Home() {
 
       {/* ── HERO BANNER ── */}
       <section
-        className="w-full relative flex items-center justify-center px-6"
-        style={{
-          height: "500px",
-          backgroundImage: `url(${merakiLogoBege})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center center",
-          backgroundRepeat: "no-repeat",
-        }}
+        className="w-full relative overflow-hidden"
+        style={{ backgroundColor: "#111111" }}
       >
-        {/* Overlay preto com opacidade 0.75 para o texto ficar legível */}
+        {/* Imagem com proporção natural — sem corte, sem barras */}
+        <img
+          src={merakiLogoBege}
+          alt=""
+          aria-hidden="true"
+          className="w-full block select-none pointer-events-none"
+          style={{ height: "auto", display: "block" }}
+        />
+        {/* Overlay escuro para legibilidade do texto */}
         <div
           className="absolute inset-0"
           style={{ backgroundColor: "rgba(17,17,17,0.75)" }}
         />
-        <div className="relative z-10 text-center max-w-3xl">
-          <h1
-            className="font-serif italic font-light leading-tight"
-            style={{ fontSize: "clamp(2.6rem, 7vw, 5.5rem)", color: BEGE }}
-          >
-            O caimento perfeito existe.
-          </h1>
-          <p
-            className="font-sans font-light mt-6"
-            style={{
-              fontSize: "0.72rem",
-              letterSpacing: "0.22em",
-              color: GOLD,
-              lineHeight: 1.8,
-              textTransform: "uppercase",
-            }}
-          >
-            Descubra o poder da sua feminilidade com nossa moda íntima.
-          </p>
+        {/* Texto centralizado sobre a imagem */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center px-6">
+          <div className="text-center max-w-3xl">
+            <h1
+              className="font-serif italic font-light leading-tight"
+              style={{ fontSize: "clamp(2.4rem, 6vw, 5rem)", color: BEGE }}
+            >
+              O caimento perfeito existe.
+            </h1>
+            <p
+              className="font-sans font-light mt-6"
+              style={{
+                fontSize: "0.72rem",
+                letterSpacing: "0.22em",
+                color: GOLD,
+                lineHeight: 1.8,
+                textTransform: "uppercase",
+              }}
+            >
+              Descubra o poder da sua feminilidade com nossa moda íntima.
+            </p>
+          </div>
         </div>
       </section>
 
