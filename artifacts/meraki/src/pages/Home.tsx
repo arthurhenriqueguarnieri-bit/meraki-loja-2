@@ -87,7 +87,7 @@ export default function Home() {
         {/* Texto centralizado com padding-bottom para alinhar ao espaço vazio da imagem */}
         <div
           className="absolute inset-0 flex flex-col items-center justify-center px-6"
-          style={{ paddingBottom: "120px" }}
+          style={{ paddingBottom: "220px" }}
         >
           <div className="text-center max-w-3xl">
             <h1
