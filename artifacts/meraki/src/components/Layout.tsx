@@ -64,7 +64,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               src={merakiLogoBege}
               alt="Meraki Moda Íntima"
               className="transition-opacity group-hover:opacity-75"
-              style={{ height: "30px", width: "auto", maxWidth: "150px", objectFit: "contain", display: "block", overflow: "visible" }}
+              style={{ height: "30px", width: "auto", maxWidth: "120px", display: "block", overflow: "visible" }}
             />
           </Link>
 
