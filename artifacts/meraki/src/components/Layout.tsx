@@ -38,9 +38,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
       {/* ── HEADER ── */}
       <header
         className="sticky top-0 z-50 border-b"
-        style={{ backgroundColor: HEADER_BG, borderColor: GOLD, overflow: "visible", minHeight: "70px", display: "flex", alignItems: "center" }}
+        style={{ backgroundColor: HEADER_BG, borderColor: GOLD, overflow: "visible", minHeight: "60px", display: "flex", alignItems: "center" }}
       >
-        <div className="container mx-auto px-4 flex items-center justify-between w-full" style={{ overflow: "visible", minHeight: "70px" }}>
+        <div className="container mx-auto px-4 flex items-center justify-between w-full" style={{ overflow: "visible", minHeight: "60px" }}>
 
           {/* Hamburger */}
           <div className="w-16 flex items-center">
@@ -64,7 +64,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               src={merakiLogoBege}
               alt="Meraki Moda Íntima"
               className="transition-opacity group-hover:opacity-75"
-              style={{ height: "30px", width: "auto", maxWidth: "120px", display: "block", overflow: "visible" }}
+              style={{ height: "28px", width: "auto", display: "block", objectFit: "contain" }}
             />
           </Link>
 
