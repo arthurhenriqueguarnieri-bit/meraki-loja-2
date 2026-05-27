@@ -67,26 +67,21 @@ export default function Home() {
   return (
     <div className="flex flex-col">
 
-      {/* ── HERO BANNER — fundo preto sólido, logo fantasma ── */}
+      {/* ── HERO BANNER ── */}
       <section
-        className="w-full relative flex items-center justify-center py-28 md:py-40 px-6 overflow-hidden"
-        style={{ backgroundColor: "#111111" }}
+        className="w-full relative flex items-center justify-center px-6"
+        style={{
+          height: "500px",
+          backgroundImage: `url(${merakiLogoBege})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center center",
+          backgroundRepeat: "no-repeat",
+        }}
       >
-        {/* Logo fantasma — centralizada, 70% da altura, opacidade 0.25 */}
-        <img
-          src={merakiLogoBege}
-          alt=""
-          aria-hidden="true"
-          className="absolute pointer-events-none select-none"
-          style={{
-            opacity: 0.25,
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: "100%",
-            height: "auto",
-            objectFit: "contain",
-          }}
+        {/* Overlay preto com opacidade 0.75 para o texto ficar legível */}
+        <div
+          className="absolute inset-0"
+          style={{ backgroundColor: "rgba(17,17,17,0.75)" }}
         />
         <div className="relative z-10 text-center max-w-3xl">
           <h1
