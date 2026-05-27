@@ -3,6 +3,7 @@ import { useStore, Product } from "@/lib/store";
 import { formatCurrency } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import merakiLogo from "@assets/meraki_logo_transparente_1779840440909.png";
 
 const GOLD = "#C9B99A";
 const BEGE = "#F5F0EB";
@@ -64,12 +65,20 @@ export default function Home() {
   return (
     <div className="flex flex-col">
 
-      {/* ── HERO BANNER — fundo preto sólido, sem foto ── */}
+      {/* ── HERO BANNER — fundo preto sólido, logo fantasma ── */}
       <section
-        className="w-full flex items-center justify-center py-28 md:py-40 px-6"
+        className="w-full relative flex items-center justify-center py-28 md:py-40 px-6 overflow-hidden"
         style={{ backgroundColor: "#111111" }}
       >
-        <div className="text-center max-w-3xl">
+        {/* Logo fantasma — opacidade 0.15, centralizada */}
+        <img
+          src={merakiLogo}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none"
+          style={{ opacity: 0.15 }}
+        />
+        <div className="relative z-10 text-center max-w-3xl">
           <h1
             className="font-serif italic font-light leading-tight"
             style={{ fontSize: "clamp(2.6rem, 7vw, 5.5rem)", color: BEGE }}
@@ -116,6 +125,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+
 
       {/* ── CATEGORY FILTERS ── */}
       <section id="colecao" className="py-12 md:py-14" style={{ backgroundColor: DARK }}>
