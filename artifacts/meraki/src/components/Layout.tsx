@@ -43,14 +43,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
           backgroundColor: HEADER_BG,
           borderColor: GOLD,
           overflow: "visible",
-          minHeight: "60px",
+          minHeight: "70px",
           display: "flex",
           alignItems: "center",
         }}
       >
         <div
           className="container mx-auto px-4 flex items-center justify-between w-full"
-          style={{ overflow: "visible", minHeight: "60px" }}
+          style={{ overflow: "visible", minHeight: "70px" }}
         >
           {/* Hamburger */}
           <div className="w-16 flex items-center">
@@ -87,9 +87,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
               alt="Meraki Moda Íntima"
               className="transition-opacity group-hover:opacity-75"
               style={{
-                height: "45px",
-                width: "180px",
-                display: "block",
+                height: "55px",
+                width: "auto",
+                display: "200px",
                 objectFit: "contain",
               }}
             />
