@@ -1,33 +1,66 @@
 import React, { useState } from "react";
 import { useStore, Product, Size } from "@/lib/store";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Trash2, Edit, Plus, X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { formatCurrency } from "@/lib/utils";
 
+const GOLD = "#C9B99A";
+const BEGE = "#F5F0EB";
+const DARK = "#1A1A1A";
+const CARD_BG = "#222222";
+const SURFACE = "#1E1E1E";
+
+const inputStyle: React.CSSProperties = {
+  backgroundColor: "#1A1A1A",
+  border: "1px solid rgba(201,185,154,0.25)",
+  color: BEGE,
+  padding: "0.55rem 0.75rem",
+  fontFamily: "'Montserrat', sans-serif",
+  fontWeight: 300,
+  fontSize: "0.82rem",
+  width: "100%",
+  outline: "none",
+  borderRadius: "1px",
+};
+
+const labelStyle: React.CSSProperties = {
+  fontFamily: "'Montserrat', sans-serif",
+  fontWeight: 300,
+  fontSize: "0.6rem",
+  letterSpacing: "0.22em",
+  textTransform: "uppercase" as const,
+  color: GOLD,
+  display: "block",
+  marginBottom: "0.35rem",
+};
+
+function Field({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <div>
+      <label style={labelStyle}>{label}</label>
+      {children}
+    </div>
+  );
+}
+
 export default function Admin() {
-  const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    return sessionStorage.getItem("meraki_admin_auth") === "true";
-  });
+  const [isAuthenticated, setIsAuthenticated] = useState(() =>
+    sessionStorage.getItem("meraki_admin_auth") === "true"
+  );
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  
+
   const { products, addProduct, updateProduct, deleteProduct } = useStore();
   const { toast } = useToast();
 
   const [editingId, setEditingId] = useState<string | null>(null);
-  
   const [formData, setFormData] = useState<Partial<Product>>({
     name: "",
     description: "",
     price: 0,
     category: "Conjunto",
     imageUrl: "",
-    sizes: [{ label: "P", stock: 0 }, { label: "M", stock: 0 }, { label: "G", stock: 0 }]
+    sizes: [{ label: "P", stock: 0 }, { label: "M", stock: 0 }, { label: "G", stock: 0 }],
   });
 
   const handleLogin = (e: React.FormEvent) => {
@@ -37,7 +70,7 @@ export default function Admin() {
       setIsAuthenticated(true);
       setError("");
     } else {
-      setError("Senha incorreta");
+      setError("Senha incorreta.");
     }
   };
 
@@ -49,7 +82,7 @@ export default function Admin() {
       price: 0,
       category: "Conjunto",
       imageUrl: "",
-      sizes: [{ label: "P", stock: 0 }, { label: "M", stock: 0 }, { label: "G", stock: 0 }]
+      sizes: [{ label: "P", stock: 0 }, { label: "M", stock: 0 }, { label: "G", stock: 0 }],
     });
   };
 
@@ -61,10 +94,7 @@ export default function Admin() {
 
   const handleAddSize = () => {
     if (!formData.sizes) return;
-    setFormData({
-      ...formData,
-      sizes: [...formData.sizes, { label: "", stock: 0 }]
-    });
+    setFormData({ ...formData, sizes: [...formData.sizes, { label: "", stock: 0 }] });
   };
 
   const handleRemoveSize = (index: number) => {
@@ -83,237 +113,384 @@ export default function Admin() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (!formData.name || !formData.price || !formData.imageUrl || !formData.category) {
-      toast({ title: "Erro", description: "Preencha todos os campos obrigatórios.", variant: "destructive" });
+      toast({ title: "Campos obrigatórios", description: "Preencha todos os campos obrigatórios.", variant: "destructive" });
       return;
     }
-
     const productToSave = {
       ...formData,
       id: editingId || Date.now().toString(),
       createdAt: editingId ? (formData as Product).createdAt : Date.now(),
-      sizes: formData.sizes?.filter(s => s.label.trim() !== "") || []
+      sizes: formData.sizes?.filter(s => s.label.trim() !== "") || [],
     } as Product;
 
     if (editingId) {
       updateProduct(productToSave);
-      toast({ title: "Sucesso", description: "Produto atualizado." });
+      toast({ title: "Produto atualizado." });
     } else {
       addProduct(productToSave);
-      toast({ title: "Sucesso", description: "Produto cadastrado." });
+      toast({ title: "Produto cadastrado." });
     }
-
     resetForm();
   };
 
+  /* ── LOGIN ── */
   if (!isAuthenticated) {
     return (
-      <div className="container mx-auto px-4 py-24 flex items-center justify-center min-h-[70vh]">
-        <div className="max-w-sm w-full bg-muted/30 p-8 border border-border/40 text-center">
-          <h1 className="font-serif italic text-3xl mb-8">Administração</h1>
-          <form onSubmit={handleLogin} className="space-y-6 text-left">
-            <div className="space-y-2">
-              <Label htmlFor="password">Senha de acesso</Label>
-              <Input 
-                id="password" 
-                type="password" 
+      <div
+        className="container mx-auto px-4 py-24 flex items-center justify-center min-h-[70vh]"
+        data-testid="admin-login"
+      >
+        <div
+          className="w-full max-w-sm p-10 text-center"
+          style={{ backgroundColor: CARD_BG, border: `1px solid rgba(201,185,154,0.2)` }}
+        >
+          <h1
+            className="font-serif italic font-light mb-10"
+            style={{ fontSize: "2rem", color: BEGE }}
+          >
+            Administração
+          </h1>
+          <form onSubmit={handleLogin} className="text-left space-y-5">
+            <Field label="Senha de acesso">
+              <input
+                type="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="rounded-none focus-visible:ring-1 focus-visible:ring-primary"
+                onChange={e => setPassword(e.target.value)}
+                style={inputStyle}
+                data-testid="input-admin-password"
               />
-              {error && <p className="text-sm text-destructive mt-1">{error}</p>}
-            </div>
-            <Button type="submit" className="w-full rounded-none uppercase tracking-wider text-xs h-12">
+              {error && (
+                <p
+                  className="mt-2 font-sans font-light text-xs"
+                  style={{ color: "#e05252", letterSpacing: "0.05em" }}
+                >
+                  {error}
+                </p>
+              )}
+            </Field>
+            <button
+              type="submit"
+              className="w-full font-sans font-light transition-all mt-4"
+              style={{
+                fontSize: "0.62rem",
+                letterSpacing: "0.28em",
+                textTransform: "uppercase",
+                backgroundColor: GOLD,
+                color: DARK,
+                border: `1px solid ${GOLD}`,
+                padding: "0.85rem",
+              }}
+              data-testid="btn-admin-login"
+            >
               Entrar
-            </Button>
+            </button>
           </form>
         </div>
       </div>
     );
   }
 
+  /* ── PANEL ── */
   return (
-    <div className="container mx-auto px-4 py-12 max-w-5xl">
-      <div className="flex justify-between items-center mb-12 border-b border-border/40 pb-6">
-        <h1 className="font-serif italic text-4xl">Painel de Controle</h1>
-        <Button 
-          variant="outline" 
-          onClick={() => {
-            sessionStorage.removeItem("meraki_admin_auth");
-            setIsAuthenticated(false);
+    <div className="container mx-auto px-4 py-12 max-w-6xl" data-testid="admin-panel">
+      <div
+        className="flex justify-between items-center mb-12 pb-5"
+        style={{ borderBottom: `1px solid rgba(201,185,154,0.2)` }}
+      >
+        <h1
+          className="font-serif italic font-light"
+          style={{ fontSize: "2rem", color: BEGE }}
+        >
+          Painel de Controle
+        </h1>
+        <button
+          onClick={() => { sessionStorage.removeItem("meraki_admin_auth"); setIsAuthenticated(false); }}
+          className="font-sans font-light transition-all"
+          style={{
+            fontSize: "0.58rem",
+            letterSpacing: "0.25em",
+            textTransform: "uppercase",
+            color: GOLD,
+            backgroundColor: "transparent",
+            border: `1px solid rgba(201,185,154,0.35)`,
+            padding: "0.5rem 1.2rem",
           }}
-          className="rounded-none uppercase tracking-wider text-xs h-10 border-primary/20"
+          data-testid="btn-admin-logout"
         >
           Sair
-        </Button>
+        </button>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-        {/* Form */}
-        <div className="lg:col-span-5 bg-muted/20 p-6 md:p-8 border border-border/40 self-start">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="font-serif text-2xl italic">{editingId ? "Editar Produto" : "Novo Produto"}</h2>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+
+        {/* ── FORM ── */}
+        <div
+          className="lg:col-span-5 self-start p-6 md:p-8"
+          style={{ backgroundColor: SURFACE, border: `1px solid rgba(201,185,154,0.15)` }}
+        >
+          <div className="flex justify-between items-center mb-7">
+            <h2
+              className="font-serif italic font-light"
+              style={{ fontSize: "1.4rem", color: BEGE }}
+            >
+              {editingId ? "Editar Produto" : "Novo Produto"}
+            </h2>
             {editingId && (
-              <Button variant="ghost" size="sm" onClick={resetForm} className="text-xs uppercase tracking-wider rounded-none">
-                Cancelar Edição
-              </Button>
+              <button
+                onClick={resetForm}
+                className="font-sans font-light transition-opacity hover:opacity-100"
+                style={{
+                  fontSize: "0.58rem",
+                  letterSpacing: "0.2em",
+                  textTransform: "uppercase",
+                  color: GOLD,
+                  opacity: 0.6,
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                }}
+              >
+                Cancelar
+              </button>
             )}
           </div>
-          
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="space-y-2">
-              <Label>Nome do Produto</Label>
-              <Input 
-                value={formData.name} 
-                onChange={e => setFormData({...formData, name: e.target.value})}
-                className="rounded-none bg-background"
+
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <Field label="Nome do produto *">
+              <input
+                value={formData.name}
+                onChange={e => setFormData({ ...formData, name: e.target.value })}
+                style={inputStyle}
                 required
+                data-testid="input-product-name"
               />
-            </div>
-            
+            </Field>
+
             <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label>Preço (R$)</Label>
-                <Input 
-                  type="number" 
-                  step="0.01" 
+              <Field label="Preço (R$) *">
+                <input
+                  type="number"
+                  step="0.01"
                   min="0"
-                  value={formData.price || ""} 
-                  onChange={e => setFormData({...formData, price: parseFloat(e.target.value) || 0})}
-                  className="rounded-none bg-background"
+                  value={formData.price || ""}
+                  onChange={e => setFormData({ ...formData, price: parseFloat(e.target.value) || 0 })}
+                  style={inputStyle}
                   required
+                  data-testid="input-product-price"
                 />
-              </div>
-              <div className="space-y-2">
-                <Label>Categoria</Label>
-                <Select 
-                  value={formData.category} 
-                  onValueChange={(v: any) => setFormData({...formData, category: v})}
+              </Field>
+              <Field label="Categoria *">
+                <select
+                  value={formData.category}
+                  onChange={e => setFormData({ ...formData, category: e.target.value as Product["category"] })}
+                  style={{ ...inputStyle, cursor: "pointer" }}
+                  data-testid="select-product-category"
                 >
-                  <SelectTrigger className="rounded-none bg-background">
-                    <SelectValue placeholder="Selecione..." />
-                  </SelectTrigger>
-                  <SelectContent className="rounded-none">
-                    <SelectItem value="Calcinha">Calcinha</SelectItem>
-                    <SelectItem value="Sutiã">Sutiã</SelectItem>
-                    <SelectItem value="Conjunto">Conjunto</SelectItem>
-                    <SelectItem value="Camisola">Camisola</SelectItem>
-                    <SelectItem value="Outros">Outros</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+                  <option value="Calcinha">Calcinha</option>
+                  <option value="Sutiã">Sutiã</option>
+                  <option value="Conjunto">Conjunto</option>
+                  <option value="Camisola">Camisola</option>
+                  <option value="Outros">Outros</option>
+                </select>
+              </Field>
             </div>
 
-            <div className="space-y-2">
-              <Label>URL da Imagem</Label>
-              <Input 
-                value={formData.imageUrl} 
-                onChange={e => setFormData({...formData, imageUrl: e.target.value})}
-                className="rounded-none bg-background"
+            <Field label="URL da imagem *">
+              <input
+                value={formData.imageUrl}
+                onChange={e => setFormData({ ...formData, imageUrl: e.target.value })}
+                style={inputStyle}
                 placeholder="https://..."
                 required
+                data-testid="input-product-image"
               />
               {formData.imageUrl && (
-                <div className="mt-2 w-20 h-24 bg-muted border border-border/40">
-                  <img src={formData.imageUrl} alt="Preview" className="w-full h-full object-cover" onError={(e) => (e.currentTarget.style.display = 'none')} />
+                <div
+                  className="mt-2"
+                  style={{ width: "4rem", aspectRatio: "1/1", backgroundColor: DARK }}
+                >
+                  <img
+                    src={formData.imageUrl}
+                    alt="Preview"
+                    className="w-full h-full object-cover"
+                    onError={e => ((e.currentTarget as HTMLImageElement).style.display = "none")}
+                  />
                 </div>
               )}
-            </div>
+            </Field>
 
-            <div className="space-y-2">
-              <Label>Descrição</Label>
-              <Textarea 
-                value={formData.description} 
-                onChange={e => setFormData({...formData, description: e.target.value})}
-                className="rounded-none bg-background min-h-[100px] resize-y"
+            <Field label="Descrição">
+              <textarea
+                value={formData.description}
+                onChange={e => setFormData({ ...formData, description: e.target.value })}
+                style={{ ...inputStyle, minHeight: "80px", resize: "vertical" }}
+                data-testid="input-product-description"
               />
-            </div>
+            </Field>
 
-            <div className="space-y-4 pt-4 border-t border-border/40">
+            <div
+              className="space-y-4 pt-4"
+              style={{ borderTop: `1px solid rgba(201,185,154,0.15)` }}
+            >
               <div className="flex justify-between items-center">
-                <Label>Tamanhos e Estoque</Label>
-                <Button type="button" variant="outline" size="sm" onClick={handleAddSize} className="rounded-none h-8 px-2 text-xs">
-                  <Plus className="w-3 h-3 mr-1" /> Adicionar
-                </Button>
+                <label style={labelStyle}>Tamanhos e estoque</label>
+                <button
+                  type="button"
+                  onClick={handleAddSize}
+                  className="flex items-center gap-1 font-sans font-light transition-opacity hover:opacity-100"
+                  style={{
+                    fontSize: "0.58rem",
+                    letterSpacing: "0.2em",
+                    textTransform: "uppercase",
+                    color: GOLD,
+                    opacity: 0.7,
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                  }}
+                  data-testid="btn-add-size"
+                >
+                  <Plus className="w-3 h-3" /> Adicionar
+                </button>
               </div>
-              
-              <div className="space-y-3">
+
+              <div className="space-y-2">
                 {formData.sizes?.map((size, index) => (
-                  <div key={index} className="flex items-center gap-3">
-                    <Input 
-                      placeholder="Tam (Ex: P, M, 42)" 
-                      value={size.label} 
-                      onChange={e => handleSizeChange(index, 'label', e.target.value)}
-                      className="rounded-none bg-background w-1/2"
+                  <div key={index} className="flex items-center gap-2">
+                    <input
+                      placeholder="Tam. (P, M, 42...)"
+                      value={size.label}
+                      onChange={e => handleSizeChange(index, "label", e.target.value)}
+                      style={{ ...inputStyle, flex: 1 }}
                     />
-                    <Input 
-                      type="number" 
+                    <input
+                      type="number"
                       min="0"
-                      placeholder="Qtd" 
-                      value={size.stock === 0 && size.label === "" ? "" : size.stock} 
-                      onChange={e => handleSizeChange(index, 'stock', parseInt(e.target.value) || 0)}
-                      className="rounded-none bg-background w-1/3"
+                      placeholder="Qtd"
+                      value={size.stock === 0 && size.label === "" ? "" : size.stock}
+                      onChange={e => handleSizeChange(index, "stock", parseInt(e.target.value) || 0)}
+                      style={{ ...inputStyle, width: "5rem", flex: "none" }}
                     />
-                    <Button 
-                      type="button" 
-                      variant="ghost" 
-                      size="icon" 
+                    <button
+                      type="button"
                       onClick={() => handleRemoveSize(index)}
-                      className="text-muted-foreground hover:text-destructive shrink-0"
+                      className="p-1 transition-opacity hover:opacity-100"
+                      style={{ color: GOLD, opacity: 0.4, background: "none", border: "none", cursor: "pointer" }}
                     >
-                      <X className="w-4 h-4" />
-                    </Button>
+                      <X className="w-3.5 h-3.5" />
+                    </button>
                   </div>
                 ))}
                 {formData.sizes?.length === 0 && (
-                  <p className="text-xs text-muted-foreground italic">Nenhum tamanho adicionado.</p>
+                  <p
+                    className="font-sans font-light text-xs italic"
+                    style={{ color: GOLD, opacity: 0.5 }}
+                  >
+                    Nenhum tamanho adicionado.
+                  </p>
                 )}
               </div>
             </div>
 
-            <Button type="submit" className="w-full rounded-none uppercase tracking-wider text-xs h-12 mt-8">
+            <button
+              type="submit"
+              className="w-full font-sans font-light transition-all mt-6"
+              style={{
+                fontSize: "0.62rem",
+                letterSpacing: "0.28em",
+                textTransform: "uppercase",
+                backgroundColor: GOLD,
+                color: DARK,
+                border: `1px solid ${GOLD}`,
+                padding: "0.9rem",
+              }}
+              data-testid="btn-submit-product"
+            >
               {editingId ? "Salvar Alterações" : "Cadastrar Produto"}
-            </Button>
+            </button>
           </form>
         </div>
 
-        {/* List */}
+        {/* ── PRODUCT LIST ── */}
         <div className="lg:col-span-7">
-          <h2 className="font-serif text-2xl italic mb-6">Produtos Cadastrados ({products.length})</h2>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <h2
+            className="font-serif italic font-light mb-6"
+            style={{ fontSize: "1.4rem", color: BEGE }}
+          >
+            Produtos Cadastrados{" "}
+            <span style={{ color: GOLD, fontSize: "1rem" }}>({products.length})</span>
+          </h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {products.map(product => (
-              <div key={product.id} className="border border-border/40 bg-card p-4 flex gap-4">
-                <div className="w-20 aspect-[4/5] shrink-0 bg-muted">
-                  <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover" />
+              <div
+                key={product.id}
+                data-testid={`admin-product-${product.id}`}
+                className="flex gap-3 p-3"
+                style={{ backgroundColor: CARD_BG, border: `1px solid rgba(201,185,154,0.15)` }}
+              >
+                <div
+                  className="shrink-0"
+                  style={{ width: "4.5rem", aspectRatio: "1/1", backgroundColor: DARK }}
+                >
+                  <img
+                    src={product.imageUrl}
+                    alt={product.name}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <div className="flex-1 flex flex-col min-w-0">
-                  <h3 className="font-medium text-sm truncate">{product.name}</h3>
-                  <p className="text-xs text-muted-foreground mt-1">{product.category}</p>
-                  <p className="text-sm font-medium mt-2">{formatCurrency(product.price)}</p>
-                  
-                  <div className="flex gap-2 mt-auto pt-4">
-                    <Button 
-                      variant="outline" 
-                      size="sm" 
+                  <h3
+                    className="font-sans font-light text-sm leading-tight truncate"
+                    style={{ color: BEGE }}
+                  >
+                    {product.name}
+                  </h3>
+                  <p
+                    className="font-sans font-light"
+                    style={{ fontSize: "0.6rem", letterSpacing: "0.15em", textTransform: "uppercase", color: GOLD, opacity: 0.7, marginTop: "0.15rem" }}
+                  >
+                    {product.category}
+                  </p>
+                  <p
+                    className="font-sans font-light text-sm mt-1"
+                    style={{ color: GOLD }}
+                  >
+                    {formatCurrency(product.price)}
+                  </p>
+
+                  <div className="flex gap-2 mt-auto pt-2">
+                    <button
                       onClick={() => handleEdit(product)}
-                      className="rounded-none text-xs flex-1 h-8"
-                    >
-                      <Edit className="w-3 h-3 mr-1" /> Editar
-                    </Button>
-                    <Button 
-                      variant="outline" 
-                      size="sm" 
-                      onClick={() => {
-                        if(confirm("Tem certeza que deseja excluir?")) {
-                          deleteProduct(product.id);
-                        }
+                      className="flex items-center gap-1 font-sans font-light transition-all flex-1 justify-center"
+                      style={{
+                        fontSize: "0.58rem",
+                        letterSpacing: "0.18em",
+                        textTransform: "uppercase",
+                        color: BEGE,
+                        backgroundColor: "transparent",
+                        border: `1px solid rgba(201,185,154,0.3)`,
+                        padding: "0.4rem",
                       }}
-                      className="rounded-none text-xs text-destructive hover:bg-destructive hover:text-destructive-foreground h-8 border-destructive/20"
+                      data-testid={`btn-edit-${product.id}`}
+                    >
+                      <Edit className="w-2.5 h-2.5" /> Editar
+                    </button>
+                    <button
+                      onClick={() => { if (confirm("Excluir este produto?")) deleteProduct(product.id); }}
+                      className="flex items-center justify-center transition-opacity hover:opacity-100"
+                      style={{
+                        color: "#e05252",
+                        opacity: 0.6,
+                        backgroundColor: "transparent",
+                        border: `1px solid rgba(224,82,82,0.3)`,
+                        padding: "0.4rem 0.6rem",
+                      }}
+                      data-testid={`btn-delete-${product.id}`}
                     >
                       <Trash2 className="w-3 h-3" />
-                    </Button>
+                    </button>
                   </div>
                 </div>
               </div>
