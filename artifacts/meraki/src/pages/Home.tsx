@@ -72,13 +72,22 @@ export default function Home() {
         className="w-full relative flex items-center justify-center py-28 md:py-40 px-6 overflow-hidden"
         style={{ backgroundColor: "#111111" }}
       >
-        {/* Logo fantasma — opacidade 0.25, centralizada */}
+        {/* Logo fantasma — centralizada, 70% da altura, opacidade 0.25 */}
         <img
           src={merakiLogoBege}
           alt=""
           aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none"
-          style={{ opacity: 0.25 }}
+          className="absolute pointer-events-none select-none"
+          style={{
+            opacity: 0.25,
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            height: "70%",
+            width: "auto",
+            maxWidth: "90%",
+            objectFit: "contain",
+          }}
         />
         <div className="relative z-10 text-center max-w-3xl">
           <h1
