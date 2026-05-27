@@ -3,7 +3,7 @@ import { useStore, Product, CATEGORIES } from "@/lib/store";
 import { formatCurrency } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import merakiLogoBege from "@assets/meraki_logo_bege_v2_1779843216654.png";
+import merakiLogoBege from "@assets/meraki_logo_final_1779843613636.png";
 
 const GOLD = "#C9B99A";
 const BEGE = "#F5F0EB";
