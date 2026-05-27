@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useStore, Product } from "@/lib/store";
+import { useStore, Product, CATEGORIES } from "@/lib/store";
 import { formatCurrency } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
@@ -10,15 +10,13 @@ const BEGE = "#F5F0EB";
 const DARK = "#1A1A1A";
 const CARD_BG = "#222222";
 
-const categories = ["Todos", "Calcinha", "Sutiã", "Conjunto", "Camisola", "Outros"] as const;
-type Category = typeof categories[number];
-
 export default function Home() {
   const products = useStore(state => state.products);
   const addToCart = useStore(state => state.addToCart);
+  const activeCategory = useStore(state => state.activeCategory);
+  const setActiveCategory = useStore(state => state.setActiveCategory);
   const { toast } = useToast();
 
-  const [activeCategory, setActiveCategory] = useState<Category>("Todos");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [selectedSize, setSelectedSize] = useState<string>("");
 
@@ -97,32 +95,6 @@ export default function Home() {
           >
             Descubra o poder da sua feminilidade com nossa moda íntima.
           </p>
-          <div className="mt-10 flex justify-center">
-            <a
-              href="#colecao"
-              className="font-sans font-light transition-all"
-              style={{
-                fontSize: "0.65rem",
-                letterSpacing: "0.3em",
-                textTransform: "uppercase",
-                color: GOLD,
-                border: `1px solid ${GOLD}`,
-                padding: "0.75rem 2.5rem",
-                display: "inline-block",
-                opacity: 0.9,
-              }}
-              onMouseEnter={e => {
-                (e.currentTarget as HTMLAnchorElement).style.backgroundColor = GOLD;
-                (e.currentTarget as HTMLAnchorElement).style.color = DARK;
-              }}
-              onMouseLeave={e => {
-                (e.currentTarget as HTMLAnchorElement).style.backgroundColor = "transparent";
-                (e.currentTarget as HTMLAnchorElement).style.color = GOLD;
-              }}
-            >
-              Ver coleção
-            </a>
-          </div>
         </div>
       </section>
 
@@ -131,7 +103,7 @@ export default function Home() {
       <section id="colecao" className="py-12 md:py-14" style={{ backgroundColor: DARK }}>
         <div className="container mx-auto px-4">
           <div className="flex overflow-x-auto pb-2 gap-6 md:gap-10 md:justify-center items-center">
-            {categories.map(cat => (
+            {CATEGORIES.map(cat => (
               <button
                 key={cat}
                 data-testid={`filter-${cat}`}

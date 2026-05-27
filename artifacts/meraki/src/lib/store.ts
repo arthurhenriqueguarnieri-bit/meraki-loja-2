@@ -85,9 +85,14 @@ const initialProducts: Product[] = [
   }
 ];
 
+export const CATEGORIES = ["Todos", "Calcinha", "Sutiã", "Conjunto", "Camisola", "Outros"] as const;
+export type Category = typeof CATEGORIES[number];
+
 type StoreState = {
   products: Product[];
   cart: CartItem[];
+  activeCategory: Category;
+  setActiveCategory: (category: Category) => void;
   addToCart: (item: CartItem) => void;
   removeFromCart: (productId: string, size: string) => void;
   updateCartQuantity: (productId: string, size: string, quantity: number) => void;
@@ -113,6 +118,8 @@ const getInitialCart = () => {
 export const useStore = create<StoreState>((set) => ({
   products: getInitialProducts(),
   cart: getInitialCart(),
+  activeCategory: "Todos",
+  setActiveCategory: (category) => set({ activeCategory: category }),
   
   addToCart: (item) => set((state) => {
     const existing = state.cart.find(c => c.productId === item.productId && c.size === item.size);
