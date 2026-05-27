@@ -79,20 +79,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center justify-center group select-none"
-            style={{ overflow: "visible" }}
+            className="flex flex-col items-center justify-center group select-none text-center transition-opacity hover:opacity-75"
           >
-            <img
-              src={merakiLogoBege}
-              alt="Meraki Moda Íntima"
-              className="transition-opacity group-hover:opacity-75"
-              style={{
-                height: "55px",
-                width: "auto",
-                display: "200px",
-                objectFit: "contain",
-              }}
-            />
+            <span style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic", fontSize: "24px", color: "#F5F0EB", lineHeight: 1.1 }}>
+              Meraki
+            </span>
+            <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: "8px", color: "#C9B99A", letterSpacing: "0.3em", textTransform: "uppercase", marginTop: "2px" }}>
+              Moda Íntima
+            </span>
           </Link>
 
           {/* Cart */}
