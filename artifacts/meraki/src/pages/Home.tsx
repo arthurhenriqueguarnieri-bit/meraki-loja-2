@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useStore, Product, CATEGORIES } from "@/lib/store";
+import { useStore, Product } from "@/lib/store";
 import { formatCurrency } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
@@ -117,42 +117,8 @@ export default function Home() {
       </section>
 
 
-      {/* ── CATEGORY FILTERS ── */}
-      <section id="colecao" className="py-12 md:py-14" style={{ backgroundColor: DARK }}>
-        <div className="container mx-auto px-4">
-          <div className="flex overflow-x-auto pb-2 gap-6 md:gap-10 md:justify-center items-center">
-            {CATEGORIES.map(cat => (
-              <button
-                key={cat}
-                data-testid={`filter-${cat}`}
-                onClick={() => setActiveCategory(cat)}
-                className="whitespace-nowrap font-sans font-light transition-all pb-1 relative shrink-0"
-                style={{
-                  fontSize: "0.65rem",
-                  letterSpacing: "0.3em",
-                  textTransform: "uppercase",
-                  color: activeCategory === cat ? BEGE : GOLD,
-                  opacity: activeCategory === cat ? 1 : 0.6,
-                  border: "none",
-                  background: "none",
-                  cursor: "pointer",
-                }}
-              >
-                {cat}
-                {activeCategory === cat && (
-                  <span
-                    className="absolute bottom-0 left-0 right-0 h-px"
-                    style={{ backgroundColor: GOLD }}
-                  />
-                )}
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── PRODUCT GRID ── */}
-      <section className="container mx-auto px-4 pb-24 pt-4">
+      <section id="colecao" className="container mx-auto px-4 pb-24 pt-12">
         {filteredProducts.length === 0 ? (
           <div
             className="text-center py-20 font-sans font-light text-sm"
