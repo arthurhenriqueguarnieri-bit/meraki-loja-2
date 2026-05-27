@@ -69,24 +69,26 @@ export default function Home() {
 
       {/* ── HERO BANNER ── */}
       <section
-        className="w-full relative overflow-hidden"
-        style={{ backgroundColor: "#111111" }}
+        className="w-full relative"
+        style={{
+          height: "600px",
+          backgroundImage: `url(${merakiLogoBege})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center center",
+          backgroundRepeat: "no-repeat",
+          backgroundColor: "#111111",
+        }}
       >
-        {/* Imagem com proporção natural — sem corte, sem barras */}
-        <img
-          src={merakiLogoBege}
-          alt=""
-          aria-hidden="true"
-          className="w-full block select-none pointer-events-none"
-          style={{ height: "auto", display: "block" }}
-        />
         {/* Overlay escuro para legibilidade do texto */}
         <div
           className="absolute inset-0"
           style={{ backgroundColor: "rgba(17,17,17,0.75)" }}
         />
-        {/* Texto centralizado sobre a imagem */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center px-6">
+        {/* Texto centralizado com padding-bottom para alinhar ao espaço vazio da imagem */}
+        <div
+          className="absolute inset-0 flex flex-col items-center justify-center px-6"
+          style={{ paddingBottom: "120px" }}
+        >
           <div className="text-center max-w-3xl">
             <h1
               className="font-serif italic font-light leading-tight"
