@@ -104,7 +104,7 @@ export default function Home() {
                 textTransform: "uppercase",
               }}
             >
-              Descubra o poder da sua feminilidade com nossa moda íntima.
+              Ouse e sinta-se incrível! Lingeries para todas as ocasiões, vista-se com conforto.
             </p>
           </div>
         </div>
