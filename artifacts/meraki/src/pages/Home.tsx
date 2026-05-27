@@ -88,7 +88,7 @@ export default function Home() {
         <div
           style={{
             position: "absolute",
-            top: "55%",
+            top: "60%",
             left: "50%",
             transform: "translate(-50%, -50%)",
             textAlign: "center",
