@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useLocation } from "wouter";
 import { ShoppingBag } from "lucide-react";
 import { useStore } from "@/lib/store";
+import merakiLogoBege from "@assets/meraki_logo_bege_1779840593669.png";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
@@ -30,19 +31,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
             )}
           </div>
 
-          <Link href="/" className="flex flex-col items-center group select-none">
-            <span
-              className="font-serif italic font-light leading-none group-hover:opacity-80 transition-opacity"
-              style={{ fontSize: "2.4rem", color: "#F5F0EB" }}
-            >
-              Meraki
-            </span>
-            <span
-              className="font-sans font-light mt-1 uppercase"
-              style={{ fontSize: "0.55rem", letterSpacing: "0.35em", color: "#C9B99A" }}
-            >
-              Moda Íntima
-            </span>
+          <Link href="/" className="flex items-center justify-center group select-none">
+            <img
+              src={merakiLogoBege}
+              alt="Meraki Moda Íntima"
+              className="transition-opacity group-hover:opacity-75"
+              style={{ height: "60px", width: "auto", objectFit: "contain" }}
+            />
           </Link>
 
           <div className="w-16 flex items-center justify-end">

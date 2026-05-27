@@ -3,7 +3,7 @@ import { useStore, Product } from "@/lib/store";
 import { formatCurrency } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import merakiLogo from "@assets/meraki_logo_transparente_1779840440909.png";
+import merakiLogoBege from "@assets/meraki_logo_bege_1779840593669.png";
 
 const GOLD = "#C9B99A";
 const BEGE = "#F5F0EB";
@@ -70,13 +70,13 @@ export default function Home() {
         className="w-full relative flex items-center justify-center py-28 md:py-40 px-6 overflow-hidden"
         style={{ backgroundColor: "#111111" }}
       >
-        {/* Logo fantasma — opacidade 0.15, centralizada */}
+        {/* Logo fantasma — opacidade 0.25, centralizada */}
         <img
-          src={merakiLogo}
+          src={merakiLogoBege}
           alt=""
           aria-hidden="true"
           className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none"
-          style={{ opacity: 0.15 }}
+          style={{ opacity: 0.25 }}
         />
         <div className="relative z-10 text-center max-w-3xl">
           <h1
