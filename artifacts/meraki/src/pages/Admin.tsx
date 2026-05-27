@@ -59,7 +59,7 @@ export default function Admin() {
     description: "",
     price: 0,
     salePrice: undefined,
-    category: "Conjunto",
+    category: "Sutiã",
     imageUrl: "",
     sizes: [{ label: "P", stock: 0 }, { label: "M", stock: 0 }, { label: "G", stock: 0 }],
   });
@@ -307,11 +307,14 @@ export default function Admin() {
                   style={{ ...inputStyle, cursor: "pointer" }}
                   data-testid="select-product-category"
                 >
-                  <option value="Calcinha">Calcinha</option>
                   <option value="Sutiã">Sutiã</option>
+                  <option value="Calcinha">Calcinha</option>
+                  <option value="Top">Top</option>
                   <option value="Conjunto">Conjunto</option>
+                  <option value="Body">Body</option>
                   <option value="Camisola">Camisola</option>
-                  <option value="Outros">Outros</option>
+                  <option value="Baby Doll">Baby Doll</option>
+                  <option value="Biquíni">Biquíni</option>
                 </select>
               </Field>
             </div>

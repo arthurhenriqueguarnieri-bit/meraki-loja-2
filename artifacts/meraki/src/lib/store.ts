@@ -8,7 +8,7 @@ export type Product = {
   description: string;
   price: number;
   salePrice?: number;
-  category: "Calcinha" | "Sutiã" | "Conjunto" | "Camisola" | "Outros";
+  category: "Sutiã" | "Calcinha" | "Top" | "Conjunto" | "Body" | "Camisola" | "Baby Doll" | "Biquíni";
   imageUrl: string;
   sizes: Size[];
   createdAt: number;
@@ -70,7 +70,7 @@ const initialProducts: Product[] = [
     name: "Body Renda Floral",
     description: "Versatilidade e sensualidade. Body todo em renda floral exclusiva, sem bojo, ideal para compor looks outwear.",
     price: 179.90,
-    category: "Outros",
+    category: "Body",
     imageUrl: "https://picsum.photos/400/500?random=5",
     sizes: [{ label: "P", stock: 0 }, { label: "M", stock: 5 }, { label: "G", stock: 3 }],
     createdAt: Date.now() - 4000
@@ -87,7 +87,7 @@ const initialProducts: Product[] = [
   }
 ];
 
-export const CATEGORIES = ["Todos", "Calcinha", "Sutiã", "Conjunto", "Camisola", "Outros"] as const;
+export const CATEGORIES = ["Todos", "Sutiã", "Calcinha", "Top", "Conjunto", "Body", "Camisola", "Baby Doll", "Biquíni"] as const;
 export type Category = typeof CATEGORIES[number];
 
 type StoreState = {
