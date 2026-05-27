@@ -58,6 +58,7 @@ export default function Admin() {
     name: "",
     description: "",
     price: 0,
+    salePrice: undefined,
     category: "Conjunto",
     imageUrl: "",
     sizes: [{ label: "P", stock: 0 }, { label: "M", stock: 0 }, { label: "G", stock: 0 }],
@@ -80,6 +81,7 @@ export default function Admin() {
       name: "",
       description: "",
       price: 0,
+      salePrice: undefined,
       category: "Conjunto",
       imageUrl: "",
       sizes: [{ label: "P", stock: 0 }, { label: "M", stock: 0 }, { label: "G", stock: 0 }],
@@ -280,6 +282,24 @@ export default function Admin() {
                   data-testid="input-product-price"
                 />
               </Field>
+              <Field label="Preço promo (R$)">
+                <input
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  placeholder="Opcional"
+                  value={formData.salePrice || ""}
+                  onChange={e => {
+                    const v = parseFloat(e.target.value);
+                    setFormData({ ...formData, salePrice: isNaN(v) || e.target.value === "" ? undefined : v });
+                  }}
+                  style={{ ...inputStyle, borderColor: formData.salePrice ? GOLD : "rgba(201,185,154,0.25)" }}
+                  data-testid="input-product-sale-price"
+                />
+              </Field>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
               <Field label="Categoria *">
                 <select
                   value={formData.category}

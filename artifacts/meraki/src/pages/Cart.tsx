@@ -150,12 +150,30 @@ export default function Cart() {
                     </button>
                   </div>
 
-                  <p
-                    className="font-sans font-light text-sm"
-                    style={{ color: GOLD }}
-                  >
-                    {formatCurrency(item.price * item.quantity)}
-                  </p>
+                  <div className="text-right">
+                    <p
+                      className="font-sans font-light text-sm"
+                      style={{ color: GOLD }}
+                    >
+                      {formatCurrency(item.price * item.quantity)}
+                    </p>
+                    {item.originalPrice && (
+                      <>
+                        <p
+                          className="font-sans font-light text-xs line-through"
+                          style={{ color: "rgba(245,240,235,0.35)" }}
+                        >
+                          {formatCurrency(item.originalPrice * item.quantity)}
+                        </p>
+                        <p
+                          className="font-sans font-light text-[10px] mt-0.5"
+                          style={{ color: GOLD, letterSpacing: "0.05em" }}
+                        >
+                          economia: {formatCurrency((item.originalPrice - item.price) * item.quantity)}
+                        </p>
+                      </>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>

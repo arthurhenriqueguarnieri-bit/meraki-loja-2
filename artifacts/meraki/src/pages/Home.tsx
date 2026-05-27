@@ -31,12 +31,14 @@ export default function Home() {
       return;
     }
     if (availableSizes.length === 1) {
+      const effectivePrice = product.salePrice ?? product.price;
       addToCart({
         productId: product.id,
         productName: product.name,
         size: availableSizes[0].label,
         quantity: 1,
-        price: product.price,
+        price: effectivePrice,
+        originalPrice: product.salePrice ? product.price : undefined,
         imageUrl: product.imageUrl,
       });
       toast({ title: "Adicionado ao carrinho", description: `${product.name} — Tam. ${availableSizes[0].label}` });
@@ -48,12 +50,14 @@ export default function Home() {
 
   const confirmAddToCart = () => {
     if (!selectedProduct || !selectedSize) return;
+    const effectivePrice = selectedProduct.salePrice ?? selectedProduct.price;
     addToCart({
       productId: selectedProduct.id,
       productName: selectedProduct.name,
       size: selectedSize,
       quantity: 1,
-      price: selectedProduct.price,
+      price: effectivePrice,
+      originalPrice: selectedProduct.salePrice ? selectedProduct.price : undefined,
       imageUrl: selectedProduct.imageUrl,
     });
     toast({ title: "Adicionado ao carrinho", description: `${selectedProduct.name} — Tam. ${selectedSize}` });
@@ -146,6 +150,7 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
             {filteredProducts.map(product => {
               const outOfStock = product.sizes.every(s => s.stock === 0);
+              const onSale = !!product.salePrice && product.salePrice < product.price;
               return (
                 <div
                   key={product.id}
@@ -161,6 +166,19 @@ export default function Home() {
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       loading="lazy"
                     />
+                    {/* Badges — PROMO takes priority over Esgotado */}
+                    {onSale && (
+                      <div
+                        className="absolute top-2 left-2 font-sans font-light text-[9px] uppercase px-2 py-1"
+                        style={{
+                          letterSpacing: "0.2em",
+                          backgroundColor: GOLD,
+                          color: "#1A1A1A",
+                        }}
+                      >
+                        PROMO
+                      </div>
+                    )}
                     {outOfStock && (
                       <div
                         className="absolute top-2 right-2 font-sans font-light text-[9px] uppercase px-2 py-1"
@@ -184,12 +202,30 @@ export default function Home() {
                     >
                       {product.name}
                     </h3>
-                    <p
-                      className="font-sans font-light text-sm mt-0.5"
-                      style={{ color: GOLD }}
-                    >
-                      {formatCurrency(product.price)}
-                    </p>
+
+                    {onSale ? (
+                      <div className="flex items-baseline gap-2 mt-0.5">
+                        <span
+                          className="font-sans font-light text-sm"
+                          style={{ color: GOLD }}
+                        >
+                          {formatCurrency(product.salePrice!)}
+                        </span>
+                        <span
+                          className="font-sans font-light text-xs line-through"
+                          style={{ color: "rgba(245,240,235,0.35)" }}
+                        >
+                          {formatCurrency(product.price)}
+                        </span>
+                      </div>
+                    ) : (
+                      <p
+                        className="font-sans font-light text-sm mt-0.5"
+                        style={{ color: GOLD }}
+                      >
+                        {formatCurrency(product.price)}
+                      </p>
+                    )}
 
                     <div className="mt-3">
                       <button

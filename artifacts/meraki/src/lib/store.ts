@@ -7,6 +7,7 @@ export type Product = {
   name: string;
   description: string;
   price: number;
+  salePrice?: number;
   category: "Calcinha" | "Sutiã" | "Conjunto" | "Camisola" | "Outros";
   imageUrl: string;
   sizes: Size[];
@@ -18,6 +19,7 @@ export type CartItem = {
   productName: string;
   size: string;
   quantity: number;
+  originalPrice?: number;
   price: number;
   imageUrl: string;
 };
