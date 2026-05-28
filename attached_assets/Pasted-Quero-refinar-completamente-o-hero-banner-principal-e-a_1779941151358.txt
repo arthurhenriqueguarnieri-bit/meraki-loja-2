@@ -1,0 +1,259 @@
+Quero refinar completamente o hero/banner principal e algumas partes do site da Meraki Moda Íntima seguindo uma direção visual premium, editorial, minimalista e sofisticada.
+
+IMPORTANTE:
+
+* manter a identidade visual atual
+* manter preto predominante
+* manter dourado suave/bege
+* manter tipografia elegante
+* manter a logo original da Meraki
+* não transformar o site em marketplace visual
+* o objetivo é deixar o site com aparência de marca premium/editorial de moda íntima
+
+====================================
+
+1. REFAZER O HERO PRINCIPAL
+   ====================================
+
+Quero que o hero fique mais editorial e sofisticado.
+
+A composição deve seguir esta ideia:
+
+* sutiã centralizado na parte superior
+* frase principal centralizada
+* botão CTA centralizado
+* assinatura “Meraki” gigante ao fundo como elemento artístico
+* composição mais equilibrada e elegante
+* menos espaço vazio
+* sensação premium/luxo minimalista
+
+A assinatura “Meraki” no fundo:
+
+* deve ficar MUITO grande
+* baixa opacidade
+* funcionando como textura visual
+* pode cortar parcialmente nas bordas inferiores
+* NÃO deve parecer apenas uma logo repetida
+* deve parecer parte da direção artística
+
+Exemplo de estilo:
+
+* editorial fashion
+* lingerie premium
+* perfume/joalheria/moda sofisticada
+
+====================================
+2. AJUSTAR RESPONSIVIDADE DO HERO
+=================================
+
+Problema atual:
+
+* a logo/sutiã corta em tela cheia
+
+Corrigir:
+
+* evitar qualquer corte importante da logo principal
+* usar `object-fit: contain`
+* usar `height: auto`
+* usar `min-height`
+* evitar `overflow: hidden`
+* manter boa proporção em desktop e mobile
+
+A composição precisa:
+
+* respirar melhor
+* ficar elegante em telas grandes
+* manter equilíbrio visual
+
+====================================
+3. FRASE PRINCIPAL
+==================
+
+Manter:
+
+“O caimento perfeito existe.”
+
+Mas:
+
+* aumentar destaque visual
+* deixar maior
+* melhorar line-height
+* melhorar espaçamento
+
+A frase deve ser um dos focos principais da tela.
+
+====================================
+4. BOTÃO CTA NO HERO
+====================
+
+Adicionar botão centralizado abaixo da frase:
+
+“VER COLEÇÃO”
+
+Estilo:
+
+* elegante
+* borda fina dourada
+* fundo transparente
+* hover sofisticado
+* microanimação suave
+
+Ao clicar:
+
+* rolar suavemente até os produtos
+
+Adicionar também uma pequena seta indicando scroll abaixo do botão.
+
+====================================
+5. MICROINTERAÇÕES E ANIMAÇÕES
+==============================
+
+Adicionar:
+
+* hover elegante nos botões
+* transições suaves
+* fade-in leve
+* animações discretas
+* menu lateral mais fluido
+* sensação premium
+
+IMPORTANTE:
+não exagerar nas animações.
+
+Tudo deve ser:
+
+* suave
+* refinado
+* minimalista
+
+====================================
+6. MANTER E MELHORAR O MENU LATERAL
+===================================
+
+Manter:
+
+* blur escuro
+* estética minimalista
+* categorias organizadas
+* preto e dourado
+
+Melhorar:
+
+* animação de abertura
+* suavidade
+* responsividade
+* área clicável
+
+====================================
+7. REMOVER PAGAMENTO VIA PIX/CARTÃO
+===================================
+
+Remover temporariamente:
+
+* botão “Pagar via Pix ou Cartão”
+
+Deixar somente:
+“Finalizar pelo WhatsApp”
+
+====================================
+8. FINALIZAÇÃO PELO WHATSAPP
+============================
+
+Ao finalizar pedido:
+abrir WhatsApp automaticamente com mensagem preenchida contendo:
+
+* produtos
+* tamanho
+* quantidade
+* subtotal
+* total
+* espaço para endereço
+* observações
+
+Mensagem exemplo:
+
+Olá! Gostaria de finalizar meu pedido na Meraki ✨
+
+Produtos:
+• [Produto]
+Tamanho: [Tamanho]
+Quantidade: [Quantidade]
+
+Total: R$ [Total]
+
+Endereço:
+[Cliente preenche]
+
+Observações:
+[Cliente preenche]
+
+====================================
+9. BOTÃO FLUTUANTE DE AJUDA
+===========================
+
+Adicionar botão flutuante elegante do WhatsApp.
+
+Texto:
+“Fale com a Meraki ✨”
+
+ou
+
+“Precisa de ajuda?”
+
+Visual:
+
+* discreto
+* premium
+* elegante
+* compatível com o design
+
+Ao clicar:
+abrir WhatsApp com mensagem automática:
+
+“Olá! Tenho uma dúvida sobre os produtos da Meraki ✨”
+
+====================================
+10. FAQ (DÚVIDAS FREQUENTES)
+============================
+
+Criar seção elegante de FAQ abaixo dos produtos.
+
+Visual:
+
+* minimalista
+* sofisticado
+* acordeão expansível
+* combinando com a identidade do site
+
+Perguntas provisórias:
+
+* Como escolher meu tamanho?
+* Como funciona a entrega?
+* Posso trocar uma peça?
+* Como cuidar das peças?
+* Posso tirar dúvidas pelo WhatsApp?
+
+====================================
+11. SEÇÃO “SOBRE A MERAKI”
+==========================
+
+Adicionar seção elegante e minimalista sobre a marca.
+
+Texto provisório:
+
+“A Meraki Moda Íntima nasceu para unir conforto, delicadeza e elegância em peças que valorizam cada detalhe. Nossa proposta é oferecer lingeries escolhidas com carinho, pensadas para acompanhar diferentes momentos com leveza, beleza e confiança.”
+
+====================================
+12. MANTER IDENTIDADE VISUAL
+============================
+
+NÃO alterar:
+
+* preto predominante
+* dourado suave
+* estética sofisticada
+* minimalismo
+* tipografia elegante
+* sensação premium/editorial
+
+O objetivo é elevar o refinamento visual e a experiência do usuário mantendo a identidade atual da marca.
