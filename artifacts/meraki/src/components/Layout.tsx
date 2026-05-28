@@ -227,7 +227,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </a>
 
           <a
-            href="https://wa.me/5566999621253"
+            href="https://wa.me/5566996212532"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-3 transition-opacity hover:opacity-100"
@@ -305,7 +305,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             className="font-sans font-light italic text-sm"
             style={{ color: GOLD, letterSpacing: "0.05em" }}
           >
-            Meraki — a arte de fazer com alma.
+            Moda com Meraki: nossa essência na sua casa.
           </p>
 
           <div
@@ -344,7 +344,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             />
 
             <a
-              href="https://wa.me/5566999621253"
+              href="https://wa.me/5566996212532"
               target="_blank"
               rel="noopener noreferrer"
               className="flex flex-col items-center gap-1 group"

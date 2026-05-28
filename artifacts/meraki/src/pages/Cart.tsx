@@ -17,7 +17,7 @@ export default function Cart() {
   const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   const handleWhatsAppCheckout = () => {
-    const phone = "5566999621253";
+    const phone = "5566996212532";
     let message = "Olá! Gostaria de finalizar meu pedido:\n\n";
     cart.forEach(item => {
       message += `- ${item.quantity}x ${item.productName} (Tam: ${item.size}) — ${formatCurrency(item.price * item.quantity)}\n`;
